@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Manuel 2 💌</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#1a0030 0%,#3d004d 45%,#6b0050 100%);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;overflow-x:hidden;position:relative;
+}
+/* BG CIRCLES */
+.bg-circle{position:fixed;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;}
+.c1{width:320px;height:320px;background:rgba(255,107,157,0.15);top:-60px;left:-80px;animation:drift1 9s ease-in-out infinite alternate;}
+.c2{width:260px;height:260px;background:rgba(196,113,237,0.13);bottom:-50px;right:-70px;animation:drift2 11s ease-in-out infinite alternate;}
+.c3{width:180px;height:180px;background:rgba(255,50,100,0.08);top:45%;left:65%;animation:drift1 8s ease-in-out infinite alternate;}
+@keyframes drift1{from{transform:translate(0,0)}to{transform:translate(28px,38px)}}
+@keyframes drift2{from{transform:translate(0,0)}to{transform:translate(-22px,30px)}}
+/* HEARTS */
+.heart{position:fixed;pointer-events:none;animation:floatUp linear infinite;z-index:1;}
+@keyframes floatUp{0%{transform:translateY(108vh);opacity:0;}12%{opacity:.7;}88%{opacity:.25;}100%{transform:translateY(-8vh);opacity:0;}}
+/* CARD */
+#card{
+  position:relative;z-index:10;
+  background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(255,107,157,0.38);
+  border-radius:28px;padding:36px 28px;
+  max-width:430px;width:100%;
+  box-shadow:0 8px 60px rgba(196,113,237,0.28),0 0 0 1px rgba(255,255,255,0.04);
+  animation:cardIn .55s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes cardIn{from{opacity:0;transform:scale(.82) translateY(22px)}to{opacity:1;transform:scale(1) translateY(0)}}
+/* LOGO */
+.logo{text-align:center;margin-bottom:6px;}
+.logo-icon{font-size:54px;display:block;animation:hb 1.4s ease-in-out infinite;}
+@keyframes hb{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.logo-name{
+  font-size:34px;font-weight:900;letter-spacing:1px;margin:8px 0 2px;
+  background:linear-gradient(135deg,#FF6B9D,#C471ED);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo-sub{font-size:11px;color:rgba(255,200,230,.42);letter-spacing:4px;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,107,157,.4),transparent);margin:18px 0;}
+/* INPUTS */
+.sec-label{font-size:13px;color:rgba(255,200,230,.68);letter-spacing:1px;text-align:center;margin-bottom:12px;}
+.name-input{
+  width:100%;padding:14px 20px;border-radius:50px;
+  background:rgba(255,255,255,.08);border:1.5px solid rgba(255,107,157,.3);
+  color:#fff;font-size:16px;font-weight:700;text-align:center;outline:none;
+  transition:border-color .3s,box-shadow .3s;-webkit-appearance:none;
+}
+.name-input::placeholder{color:rgba(255,200,230,.28);}
+.name-input:focus{border-color:#FF6B9D;box-shadow:0 0 0 3px rgba(255,107,157,.15);}
+/* BUTTONS */
+.btn-main{
+  display:block;margin-top:14px;width:100%;padding:14px;border-radius:50px;
+  background:linear-gradient(135deg,#FF6B9D,#C471ED);border:none;
+  color:#fff;font-size:17px;font-weight:900;cursor:pointer;
+  box-shadow:0 4px 24px rgba(255,107,157,.44);transition:transform .2s,box-shadow .2s;
+  -webkit-appearance:none;
+}
+.btn-main:active{transform:scale(.97);}
+.btn-restart{
+  margin-top:10px;width:100%;padding:12px;border-radius:50px;
+  background:transparent;border:1.5px solid rgba(255,107,157,.3);
+  color:rgba(255,200,230,.58);font-size:14px;font-weight:700;cursor:pointer;
+  -webkit-appearance:none;transition:border-color .2s;
+}
+.btn-restart:active{border-color:#FF6B9D;}
+/* PROGRESS */
+.prog-wrap{margin-bottom:16px;}
+.prog-top{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,200,230,.42);margin-bottom:7px;letter-spacing:1px;}
+.prog-track{height:5px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,#FF6B9D,#C471ED);border-radius:10px;width:10%;transition:width .6s cubic-bezier(.4,0,.2,1);}
+/* DOTS */
+.dots{display:flex;justify-content:center;gap:5px;margin:10px 0 14px;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .3s;}
+.dot.ok{background:linear-gradient(135deg,#FF6B9D,#C471ED);box-shadow:0 0 7px rgba(255,107,157,.5);}
+/* QUESTION */
+.q-box{text-align:center;margin-bottom:20px;}
+.q-num{font-size:10px;letter-spacing:3px;color:rgba(255,107,157,.52);margin-bottom:8px;}
+.q-emoji{font-size:40px;display:block;margin-bottom:12px;animation:popin .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popin{from{transform:scale(0)}to{transform:scale(1)}}
+.q-text{font-size:17px;font-weight:700;color:#fff;line-height:1.5;padding:0 4px;}
+.q-text .nm{color:#FF6B9D;}
+.slide{animation:slIn .35s ease;}
+@keyframes slIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+/* OPTIONS */
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{
+  width:100%;padding:13px 20px;border-radius:50px;
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,107,157,.2);
+  color:rgba(255,220,240,.9);font-size:15px;font-weight:700;cursor:pointer;
+  text-align:center;transition:background .18s,border-color .18s,transform .18s;
+  -webkit-appearance:none;
+}
+.opt:active,.opt.picked{background:rgba(255,107,157,.22);border-color:#FF6B9D;color:#fff;transform:scale(1.03);}
+/* RESULT */
+.res{text-align:center;}
+.res-emoji{font-size:72px;display:block;margin-bottom:14px;animation:popbig .6s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popbig{from{transform:scale(0) rotate(-10deg)}to{transform:scale(1) rotate(0)}}
+.res-name{font-size:22px;font-weight:900;color:#FF6B9D;margin-bottom:6px;}
+.res-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:10px;line-height:1.4;}
+.res-sub{font-size:13px;color:rgba(255,200,230,.58);line-height:1.6;margin-bottom:18px;}
+/* LOVE METER */
+.love-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,107,157,.14);border-radius:18px;padding:14px 18px;margin-bottom:16px;}
+.love-lbl{font-size:10px;letter-spacing:3px;color:rgba(255,200,230,.42);margin-bottom:8px;}
+.love-track{height:8px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden;}
+.love-fill{height:100%;background:linear-gradient(90deg,#FF6B9D,#C471ED,#FFD700);border-radius:10px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.love-pct{font-size:22px;font-weight:900;color:#FF6B9D;margin-top:8px;}
+/* WHATSAPP */
+.wa-wrap{background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.24);border-radius:18px;padding:14px;margin-bottom:12px;text-align:center;}
+.wa-hint{font-size:13px;color:rgba(255,255,255,.68);margin-bottom:12px;line-height:1.5;}
+.wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:14px;border-radius:50px;text-decoration:none;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff;font-size:16px;font-weight:900;
+  box-shadow:0 4px 22px rgba(37,211,102,.38);transition:transform .2s;
+}
+.wa-btn:active{transform:scale(.97);}
+.no-kiss{background:rgba(255,107,157,.07);border:1px solid rgba(255,107,157,.14);border-radius:14px;padding:12px;margin-bottom:12px;font-size:12px;color:rgba(255,200,230,.42);text-align:center;}
+</style>
+</head>
+<body>
+
+<!-- BG -->
+<div class="bg-circle c1"></div>
+<div class="bg-circle c2"></div>
+<div class="bg-circle c3"></div>
+<div id="hearts"></div>
+
+<div id="card">
+
+  <!-- INTRO -->
+  <div id="intro">
+    <div class="logo">
+      <span class="logo-icon">💌</span>
+      <div class="logo-name">Manuel 2</div>
+      <div class="logo-sub">TESTE DE AMOR</div>
+    </div>
+    <div class="divider"></div>
+    <div class="sec-label">✨ Primeiro, qual é o teu nome, linda?</div>
+    <input class="name-input" id="ni" type="text" placeholder="Escreve o teu nome aqui..." maxlength="28"/>
+    <button class="btn-main" onclick="start()">Começar o Teste 💖</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" style="display:none">
+    <div class="prog-wrap">
+      <div class="prog-top"><span id="ql">PERGUNTA 1 DE 10</span><span id="qs">0 💖</span></div>
+      <div class="prog-track"><div class="prog-fill" id="pf" style="width:10%"></div></div>
+    </div>
+    <div class="dots" id="dr"></div>
+    <div class="q-box" id="qb"></div>
+    <div class="opts" id="op"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" style="display:none" class="res">
+    <span class="res-emoji" id="re"></span>
+    <div class="res-name" id="rn"></div>
+    <div class="res-title" id="rt"></div>
+    <div class="res-sub" id="rs"></div>
+    <div class="love-box">
+      <div class="love-lbl">💗 NÍVEL DE AMOR</div>
+      <div class="love-track"><div class="love-fill" id="lf"></div></div>
+      <div class="love-pct" id="lp"></div>
+    </div>
+    <div id="aa"></div>
+    <button class="btn-restart" onclick="restart()">🔄 Recomeçar o teste</button>
+  </div>
+
+</div>
+
+<script>
+/* HEARTS */
+var he=['❤️','💕','💗','💓','💖','💘','🌹','✨','💝','💞','🥰','😘'];
+(function(){
+  var layer=document.getElementById('hearts');
+  layer.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;';
+  for(var i=0;i<16;i++){
+    var el=document.createElement('span');
+    el.className='heart';
+    el.textContent=he[Math.floor(Math.random()*he.length)];
+    el.style.cssText='position:absolute;font-size:'+(12+Math.random()*16)+'px;left:'+(Math.random()*100)+'vw;animation-duration:'+(9+Math.random()*9)+'s;animation-delay:'+(Math.random()*7)+'s;';
+    layer.appendChild(el);
+    el.addEventListener('animationiteration',function(){ this.style.left=(Math.random()*100)+'vw'; });
+  }
+})();
+
+/* STATE */
+var name_='',curQ=0,score=0,kissYes=false,qs=[];
+
+function buildQs(n){
+  return[
+    {e:'🤔',t:'<span class="nm">'+n+'</span>, tu confias nele?',o:[
+      {t:'✅ Sim, confio muito!',p:3,k:'c_sim'},{t:'❌ Não confio nada',p:0,k:'c_nao'},{t:'🤷 Talvez...',p:1,k:'c_tal'}]},
+    {e:'👀',t:'Tu desconfias que ele tem outra namorada?',o:[
+      {t:'😬 Sim, desconfio!',p:0,k:'d_sim'},{t:'🤨 Um pouco...',p:1,k:'d_pou'},{t:'😌 Não, de jeito nenhum',p:3,k:'d_nao'}]},
+    {e:'💗',t:'<span class="nm">'+n+'</span>, tu gostas dele?',o:[
+      {t:'❤️ Sim, gosto muito!',p:3,k:'g_sim'},{t:'💔 Não, não gosto',p:0,k:'g_nao'},{t:'🌸 Talvez goste...',p:1,k:'g_tal'}]},
+    {e:'💋',t:'Se ele te pedir um beijo, tu darias?',o:[
+      {t:'😘 Sim, dava já!',p:3,k:'b_sim',kiss:true},{t:'🙅 Não, nunca!',p:0,k:'b_nao'},{t:'🤭 Não sei...',p:1,k:'b_ns'}]},
+    {e:'🌹',t:'Ele já te fez sentir especial alguma vez?',o:[
+      {t:'💖 Sim, muitas vezes!',p:3,k:'e_sim'},{t:'😐 Uma ou duas vezes',p:1,k:'e_pou'},{t:'😞 Nunca me fez sentir especial',p:0,k:'e_nao'}]},
+    {e:'📱',t:'Tens vontade de falar com ele o dia todo?',o:[
+      {t:'🥰 Sim, sempre!',p:3,k:'f_sim'},{t:'😅 Às vezes sim',p:1,k:'f_av'},{t:'😶 Não tenho muito',p:0,k:'f_nao'}]},
+    {e:'🦋',t:'O teu coração acelera quando ele te manda mensagem?',o:[
+      {t:'💓 Sim, acelera muito!',p:3,k:'h_sim'},{t:'🤷 Um bocadinho',p:1,k:'h_pou'},{t:'😑 Não, fico normal',p:0,k:'h_nao'}]},
+    {e:'🌙',t:'Tu pensas nele antes de adormecer?',o:[
+      {t:'😍 Sim, quase sempre!',p:3,k:'s_sim'},{t:'🙂 De vez em quando',p:1,k:'s_vez'},{t:'😴 Não, adormeço logo',p:0,k:'s_nao'}]},
+    {e:'🎯',t:'Se ele te pedisse para namorar, o que dirias?',o:[
+      {t:'💍 Sim sem pensar!',p:3,k:'n_sim'},{t:'🤔 Precisava pensar',p:1,k:'n_pen'},{t:'❌ Dizia que não',p:0,k:'n_nao'}]},
+    {e:'⭐',t:'No geral, achas que ele seria um bom namorado?',o:[
+      {t:'👑 Sim, seria perfeito!',p:3,k:'bm_si'},{t:'😊 Acho que sim',p:2,k:'bm_ta'},{t:'😬 Não tenho a certeza',p:1,k:'bm_ns'},{t:'❌ Não seria',p:0,k:'bm_na'}]},
+  ];
+}
+
+function start(){
+  var v=document.getElementById('ni').value.trim();
+  if(!v){document.getElementById('ni').style.borderColor='#FF6B9D';document.getElementById('ni').focus();return;}
+  name_=v; curQ=0; score=0; kissYes=false; qs=buildQs(name_);
+  document.getElementById('intro').style.display='none';
+  document.getElementById('quiz').style.display='block';
+  var dr=document.getElementById('dr'); dr.innerHTML='';
+  for(var i=0;i<qs.length;i++){var d=document.createElement('div');d.className='dot';d.id='d'+i;dr.appendChild(d);}
+  showQ();
+}
+
+function showQ(){
+  if(curQ>=qs.length){showRes();return;}
+  var q=qs[curQ],tot=qs.length;
+  document.getElementById('ql').textContent='PERGUNTA '+(curQ+1)+' DE '+tot;
+  document.getElementById('qs').textContent=score+' 💖';
+  document.getElementById('pf').style.width=(((curQ+1)/tot)*100)+'%';
+  var qb=document.getElementById('qb');
+  qb.innerHTML='<div class="q-num">PERGUNTA '+(curQ+1)+'</div><span class="q-emoji">'+q.e+'</span><div class="q-text">'+q.t+'</div>';
+  qb.className='q-box slide'; setTimeout(function(){qb.className='q-box';},400);
+  var op=document.getElementById('op'); op.innerHTML='';
+  q.o.forEach(function(o,i){
+    var b=document.createElement('button'); b.className='opt'; b.textContent=o.t;
+    b.style.opacity='0'; b.style.transform='translateX(14px)'; b.style.transition='opacity .3s, transform .3s';
+    b.onclick=function(){pick(o,b);};
+    op.appendChild(b);
+    setTimeout(function(){b.style.opacity='1';b.style.transform='translateX(0)';},80+i*60);
+  });
+}
+
+function pick(o,b){
+  document.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+  b.classList.add('picked');
+  score+=o.p; if(o.kiss)kissYes=true;
+  document.getElementById('d'+curQ).className='dot ok';
+  document.getElementById('qs').textContent=score+' 💖';
+  setTimeout(function(){curQ++;showQ();},550);
+}
+
+function showRes(){
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('result').style.display='block';
+  var max=qs.length*3, pct=Math.round((score/max)*100);
+  var emoji,title,sub;
+  if(pct>=85){emoji='💖';title='Estás completamente apaixonada!';sub=name_+', os teus resultados mostram que gostas muito dele! O teu coração fala mais alto. 🥰';}
+  else if(pct>=65){emoji='🌹';title='Gostas dele, sim!';sub=name_+', há sentimentos bonitos aí. Talvez valha a pena explorar mais! 💕';}
+  else if(pct>=40){emoji='🤔';title='Tens sentimentos misturados';sub=name_+', ainda estás a descobrir o que sentes. Dá tempo ao tempo! 🌸';}
+  else{emoji='💔';title='Ainda não é o momento';sub=name_+', parece que o coração ainda não está convencido. Confia no teu instinto! 🌙';}
+  document.getElementById('re').textContent=emoji;
+  document.getElementById('rn').textContent=name_;
+  document.getElementById('rt').textContent=title;
+  document.getElementById('rs').textContent=sub;
+  setTimeout(function(){document.getElementById('lf').style.width=pct+'%';document.getElementById('lp').textContent=pct+'% de amor 💗';},300);
+  var aa=document.getElementById('aa');
+  if(kissYes){
+    var msg=encodeURIComponent('Olá Manuel! 😘 Eu chamo-me '+name_+' e fiz o teu teste de amor... Disseram para te pedir um beijo! 💋');
+    aa.innerHTML='<div class="wa-wrap"><div class="wa-hint">💌 <strong style="color:#25D366;">Disseste SIM ao beijo!</strong><br>Manda mensagem ao Manuel agora 😘</div><a class="wa-btn" href="https://wa.me/258850267268?text='+msg+'" target="_blank">💬 Enviar mensagem ao Manuel</a></div>';
+  } else {
+    aa.innerHTML='<div class="no-kiss">💭 Não respondeste sim ao beijo... talvez da próxima vez! 😊</div>';
+  }
+}
+
+function restart(){
+  document.getElementById('result').style.display='none';
+  document.getElementById('intro').style.display='block';
+  document.getElementById('ni').value='';
+  document.getElementById('ni').style.borderColor='rgba(255,107,157,.3)';
+}
+
+document.getElementById('ni').addEventListener('keydown',function(e){if(e.key==='Enter')start();});
+</script>
+</body>
+</html>
